@@ -23,7 +23,11 @@ if($db->connect_errno) {
     throw new Exception($db->connect_error);
 }
 
-$db->query('CREATE TABLE IF NOT EXISTS `team`(team_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL)');
+$db->query('CREATE TABLE IF NOT EXISTS `team`(
+    team_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    team_name VARCHAR(255)
+    )'
+);
 $db->query('CREATE TABLE IF NOT EXISTS `player`(
     player_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     last_name VARCHAR(255),
@@ -36,7 +40,8 @@ $db->query('CREATE TABLE IF NOT EXISTS `match`(
     team_one INT FOREIGN KEY REFERENCES team(team_id),
     team_two INT FOREIGN KEY REFERENCES team(team_id),
     score_one INT,
-    score_two INT
+    score_two INT,
+    tournament INT FOREIGN KEY REFERENCES tournament(tournament_id)
     )'
 );
 $db->query('CREATE TABLE IF NOT EXISTS `tournament`(
