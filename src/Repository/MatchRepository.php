@@ -57,5 +57,15 @@ class MatchRepository extends Repository implements IRepository {
         return parent::insert($request);
     }
 
-    
+    public function update($match) {
+        if (!$match instanceof Match) {
+            throw new \Exception('Something went wrong');
+        }
+        $request = "SET team_one = '" . addslashes($match->getTeam1()) . 
+            "', team_two = '" . addslashes($match->getTeam2()) . 
+            "', score_one = '" . addslashes($match->getResult1()) . 
+            "', score_two = '" . addslashes($match->getResult2()) . 
+            "' WHERE id = " . addslashes($match->getId()) . " ";
+        parent::update($request);
+    }
 }

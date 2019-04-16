@@ -60,9 +60,9 @@ class PlayerRepository extends Repository implements IRepository {
             throw new \Exception('Something went wrong');
         }
         $request = "SET first_name = '" . addslashes($player->getFirstname()) . 
-            "', last_name = '" . addslashes($article->getLastname()) . 
-            "', team = '" . addslashes($article->getTeam()) . 
-            "' WHERE id = " . addslashes($article->getId()) . " ";
+            "', last_name = '" . addslashes($player->getLastname()) . 
+            "', team = '" . addslashes($player->getTeam()) . 
+            "' WHERE id = " . addslashes($player->getId()) . " ";
         parent::update($request);
     }
 
