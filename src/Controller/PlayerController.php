@@ -2,34 +2,65 @@
 
 namespace App\Controller; 
 
-use App\Model\Player;
 use App\Repository\PlayerRepository;
+use App\Model\Player\Player;
+use App\Repository\TeamRepository;
 
 class PlayerController {
-    public function index() {
-        $playerRepository = new PlayerRepository();
-        $players = $playerRepository->getPlayers();
+    private $playerRepository;
+    private $teamRepository;
+
+    public function __construct() {
+        $this->playerRepository = new PlayerRepository();
+        $this->teamRepository = new TeamRepository();
     }
 
-    public function create(){
+    public function index() {
+        $players = $this->playerRepository->getResults();
+        require_once 'src/View/Player/index.php';
+    }
+
+    public function show() {
+        if(isset($_GET['id']) || empty($_GET['id'])) {
+            header('Location: /player');
+            exit;
+        }
+        $id = $_GET['id'];
+        $player = $this->playerRepository->getResults('WHERE id =' . $id);
+        require_once 'src/View/Player/show.php';
+    }
+
+    public function create() {
         $errors = [];
+        $teamRepository = new TeamRepository();
+
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if(isset($_POST['lastname']) && !empty($_POST['lastname']) || isset($_POST['firstname']) && !empty($_POST['firstname'])) {
+            if(isset($_POST['player']) && !empty($_POST['player']) &&
+            isset($_POST['team']) && !empty($_POST['team'])
+            ) {
                 $player = new Player();
-                $player->setLastname($_POST['lastname'])
-                    ->setFirstname($_POST['firstname']);
-
+                $team = $teamRepository->getResult('WHERE id =' . $_POST['team']);
+                if($team == NULL) {
+                    $errors[] = 'Team not found';
+                } else {
+                    $player->setLastname($_POST['lastname'])
+                            ->setFirstname($_POST['firstname'])
+                            ->setTeam($team);
                     $this->playerRepository->insert($player);
-
                     header('Location: /player');
                     exit;
-            } else {
+                }
+            }else {
                 $errors[] = 'Missing fields';
             }
         }
+        $teams = $teamRepository->getResults();
 
         require_once 'src/View/Player/create.php';
         return;
     }
 
+    public function update() {
+        $errors
+    }
 }
