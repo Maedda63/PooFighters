@@ -32,7 +32,8 @@ $db->query('CREATE TABLE IF NOT EXISTS `player`(
     player_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     last_name VARCHAR(255),
     first_name VARCHAR(255),
-    team INT FOREIGN KEY REFERENCES team(team_id)
+    team INT,
+    FOREIGN KEY (team) REFERENCES team(team_id)
     )'
 );
 $db->query('CREATE TABLE IF NOT EXISTS `tournament`(
@@ -42,11 +43,13 @@ $db->query('CREATE TABLE IF NOT EXISTS `tournament`(
 );
 $db->query('CREATE TABLE IF NOT EXISTS `match`(
     match_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    team_one INT FOREIGN KEY REFERENCES team(team_id),
-    team_two INT FOREIGN KEY REFERENCES team(team_id),
+    team_one INT,
+    team_two INT,
     score_one INT,
     score_two INT,
-    tournament INT FOREIGN KEY REFERENCES tournament(tournament_id)
+    tournament INT,
+    FOREIGN KEY (team_one, team_two) REFERENCES team(team_id),
+    FOREIGN KEY (tournament) REFERENCES tournament(tournament_id)
     )'
 );
 
