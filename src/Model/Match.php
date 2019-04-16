@@ -13,16 +13,17 @@ class Match {
     private $result1;
     /** @var int $result2 */
     private $result2;
+    /** @var int $tournament */
+    private $tournament;
+
 
     public function getId(): int
     {
         return $this->id;
     }
-
     public function setId(int $id): self
     {
         $this->id = $id;
-
         return $this;
     }
 
@@ -30,11 +31,9 @@ class Match {
     {
         return $this->team1;
     }
-
     public function setTeam1(Team $team1): self
     {
         $this->team1 = $team1;
-
         return $this;
     }
 
@@ -42,11 +41,9 @@ class Match {
     {
         return $this->team2;
     }
-
     public function setTeam2(Team $team2): self
     {
         $this->team2 = $team2;
-
         return $this;
     }
 
@@ -54,11 +51,9 @@ class Match {
     {
         return $this->result1;
     }
-
     public function setResult1(int $result1): self
     {
         $this->result1 = $result1;
-
         return $this;
     }
 
@@ -66,11 +61,17 @@ class Match {
     {
         return $this->result2;
     }
-
     public function setResult2(int $result2): self
     {
         $this->result2 = $result2;
+        return $this;
+    }
 
+    public function getTournament(): int {
+        return $this->tournament;
+    }
+    public function setTournament(int $tournament): self {
+        $this->tournament = $tournament;
         return $this;
     }
 }
