@@ -24,4 +24,9 @@
   </div>
 </nav>
     <div class='container-fluid' style="text-align: center">
-          <h1> Bienvenue au tournoi de Jacky !</h1>
+    <br>
+        <h1> Bienvenue au tournoi de Jacky !</h1>
+        <br>
+        <h2>Match en cours</h2>
+
+        <!-- Et là on affichera les match du tournois en cours -->
