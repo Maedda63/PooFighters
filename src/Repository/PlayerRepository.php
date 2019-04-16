@@ -36,6 +36,42 @@ class PlayerRepository extends Repository implements IRepository {
 
     public function getPlayer(string $request = ''): ?Player {
         $player = null;
-        $result = parent::getResult($request)
+        $result = parent::getResult($request);
+
+        if($result) {
+            $player = $this->convertToModel($result);
+        }
+        return $player;
     }
+
+    public function insert($player) {
+        if (!$player instanceof Player) {
+            throw new \Exception('Something went wrong');
+        }
+        $request = "(first_name, last_name, team) VALUES  ('" . 
+            addslashes($player->getFirstname()) . "','" . 
+            addslashes($player->getLastname()) . "','" . 
+            addslashes($player->getTeam()) . "')";
+        return parent::insert($request);
+    }
+
+    public function update($player) {
+        if (!$player instanceof Player) {
+            throw new \Exception('Something went wrong');
+        }
+        $request = "SET first_name = '" . addslashes($player->getFirstname()) . 
+            "', last_name = '" . addslashes($article->getLastname()) . 
+            "', team = '" . addslashes($article->getTeam()) . 
+            "' WHERE id = " . addslashes($article->getId()) . " ";
+        parent::update($request);
+    }
+
+    public function delete($player) {
+        if (!$player instanceof Player) {
+            throw new \Exception('Oops, something went wrong');
+        }
+        $request = "WHERE id = " . $player->getId();
+        parent::delete($request);
+    }
+    
 }
