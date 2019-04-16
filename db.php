@@ -58,3 +58,5 @@ $db->query('CREATE TABLE IF NOT EXISTS `match`(
 if ($db->errno) {
     throw new Exception($db->error);
 }
+
+$db->close();
