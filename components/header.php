@@ -18,7 +18,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" href=#>Équipes</a>
+      <a class="nav-item nav-link" href="./team/index">Équipes</a>
       <a class="nav-item nav-link" href=#>Joueurs</a>
     </div>
   </div>
