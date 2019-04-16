@@ -17,7 +17,7 @@ class TeamController
 
     public function index()
     {
-        $teams = $this->teamRepository->getResults;
+        $teams = $this->teamRepository->getResults();
 
         require_once 'src/View/Team/index.php';
     }
