@@ -33,7 +33,7 @@ $db->query('CREATE TABLE IF NOT EXISTS `player`(
     last_name VARCHAR(255),
     first_name VARCHAR(255),
     team INT,
-    FOREIGN KEY (team) REFERENCES team(team_id)
+    FOREIGN KEY (team) REFERENCES team(team_id) ON DELETE SET NULL
     )'
 );
 $db->query('CREATE TABLE IF NOT EXISTS `tournament`(
