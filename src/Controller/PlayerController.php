@@ -50,7 +50,7 @@ class PlayerController {
                     header('Location: /player');
                     exit;
                 }
-            }else {
+            } else {
                 $errors[] = 'Missing fields';
             }
         }
@@ -61,6 +61,42 @@ class PlayerController {
     }
 
     public function update() {
-        $errors
+        $errors = [];
+        $teamRepository = new TeamRepository();
+
+        if(!isset($_GET['id']) || empty($_GET['id'])) {
+            header('Location: /player');
+            exit;
+        }
+        $player = $this->playerRepository->getResult('WHERE id=' . $_GET['id']);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if(isset($_POST['lastname']) && !empty($_POST['lastname']) && 
+                isset($_POST['firstname']) && !empty($_POST['firstname']) &&
+                isset($_POST['team']) && !empty($_POST['team'])) {
+                
+                $team = $teamRepository->getResult('WHERE id=' . $_POST['team']);
+                $player->setLastname(htmlspecialchars($_POST['lastname']))
+                    ->setFirstname(htemlspecialchars($_POST['firstname']))
+                    ->setTeam($team);
+
+                $this->playerRepository->uptdate($player);
+
+                header('Location: /player');
+                exit;
+                } else {
+                    $errors[] = 'Missing fields';
+                }
+            }
+            $teams = $teamRepository->getResults();
+
+            require_once 'src/View/Comment/update.php';
+            return;
+    }
+
+    public function delete() {
+         if(!isset($_GET['id']) || empty($_GET['id'])) {
+            header('Location: /player');
+            return;
+        }
     }
 }
