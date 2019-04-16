@@ -35,7 +35,7 @@ class MatchRepository extends Repository implements IRepository {
         return $matches;
     }
 
-    public function getMatch(string $request = ''): ?Player {
+    public function getMatch(string $request = ''): ?Match {
         $match = null;
         $result = parent::getResult($request);
 
@@ -51,9 +51,9 @@ class MatchRepository extends Repository implements IRepository {
         }
         $request = "(team_one, team_two, score_one, score_two) VALUES  ('" . 
             addslashes($match->getTeam1()) . "','" . 
-            addslashes($player->getTeam2()) . "','" . 
-            addslashes($player->getResult1()) . "','" . 
-            addslashes($player->getResult2()) . "')";
+            addslashes($match->getTeam2()) . "','" . 
+            addslashes($match->getResult1()) . "','" . 
+            addslashes($match->getResult2()) . "')";
         return parent::insert($request);
     }
 
