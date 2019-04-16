@@ -2,6 +2,8 @@
 
 require_once 'vendor/autoload.php';
 
+require_once 'components/index.php';
+
 use Symfony\Component\Dotenv\Dotenv;
 
 $env = getenv('ENV');
