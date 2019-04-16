@@ -54,4 +54,24 @@ class PlayerRepository extends Repository implements IRepository {
             addslashes($player->getTeam()) . "')";
         return parent::insert($request);
     }
+
+    public function update($player) {
+        if (!$player instanceof Player) {
+            throw new \Exception('Something went wrong');
+        }
+        $request = "SET first_name = '" . addslashes($player->getFirstname()) . 
+            "', last_name = '" . addslashes($article->getLastname()) . 
+            "', team = '" . addslashes($article->getTeam()) . 
+            "' WHERE id = " . addslashes($article->getId()) . " ";
+        parent::update($request);
+    }
+
+    public function delete($player) {
+        if (!$player instanceof Player) {
+            throw new \Exception('Oops, something went wrong');
+        }
+        $request = "WHERE id = " . $player->getId();
+        parent::delete($request);
+    }
+    
 }
