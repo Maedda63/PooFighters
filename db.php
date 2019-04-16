@@ -48,7 +48,8 @@ $db->query('CREATE TABLE IF NOT EXISTS `match`(
     score_one INT,
     score_two INT,
     tournament INT,
-    FOREIGN KEY (team_one, team_two) REFERENCES team(team_id),
+    FOREIGN KEY (team_one) REFERENCES team(team_id),
+    FOREIGN KEY (team_two) REFERENCES team(team_id),
     FOREIGN KEY (tournament) REFERENCES tournament(tournament_id)
     )'
 );
