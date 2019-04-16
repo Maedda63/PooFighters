@@ -5,9 +5,9 @@ namespace App\Model;
 class Match {
     /** @var int $id */
     private $id;
-    /** @var array $teams */
+    /** @var Team[] $teams */
     private $teams;
-    /** @var array $results */
+    /** @var int[] $results */
     private $results;
 
     public function getId(): int
