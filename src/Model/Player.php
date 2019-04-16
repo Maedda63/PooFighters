@@ -10,7 +10,7 @@ class Player {
     private $lastname;
     /** @var string $firstname */
     private $firstname;
-    /** @var Team $team */
+    /** @var int $team */
     private $team;
 
     public function getId(): int{
@@ -37,10 +37,10 @@ class Player {
          return $this;
     }
 
-    public function getTeam(): Team{
+    public function getTeam(): int{
         return $this->team;
     }
-    public function setTeam(Team $team): self {
+    public function setTeam(int $team): self {
         $this->team = $team;
          return $this;
     }
