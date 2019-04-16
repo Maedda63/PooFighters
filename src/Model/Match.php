@@ -5,14 +5,14 @@ namespace App\Model;
 class Match {
     /** @var int $id */
     private $id;
-    /** @var int $team1 */
-    private $team1;
-    /** @var int $team2 */
-    private $team2;
-    /** @var int $result1 */
-    private $result1;
-    /** @var int $result2 */
-    private $result2;
+    /** @var int $teamOne */
+    private $teamOne;
+    /** @var int $teamTwo */
+    private $teamTwo;
+    /** @var int $resultOne */
+    private $resultOne;
+    /** @var int $resultTwo */
+    private $resultTwo;
     /** @var int $tournament */
     private $tournament;
 
@@ -27,43 +27,43 @@ class Match {
         return $this;
     }
 
-    public function getTeam1(): int
+    public function getTeamOne(): int
     {
-        return $this->team1;
+        return $this->teamOne;
     }
-    public function setTeam1(int $team1): self
+    public function setTeamOne(int $teamOne): self
     {
-        $this->team1 = $team1;
+        $this->teamOne = $teamOne;
         return $this;
     }
 
-    public function getTeam2(): int
+    public function getTeamTwo(): int
     {
-        return $this->team2;
+        return $this->teamTwo;
     }
-    public function setTeam2(int $team2): self
+    public function setTeamTwo(int $teamTwo): self
     {
-        $this->team2 = $team2;
+        $this->teamTwo = $teamTwo;
         return $this;
     }
 
-    public function getResult1(): int
+    public function getResultOne(): int
     {
-        return $this->result1;
+        return $this->resultOne;
     }
-    public function setResult1(int $result1): self
+    public function setResultOne(int $resultOne): self
     {
-        $this->result1 = $result1;
+        $this->resultOne = $resultOne;
         return $this;
     }
 
-    public function getResult2(): int
+    public function getResultTwo(): int
     {
-        return $this->result2;
+        return $this->resultTwo;
     }
-    public function setResult2(int $result2): self
+    public function setResultTwo(int $resultTwo): self
     {
-        $this->result2 = $result2;
+        $this->resultTwo = $resultTwo;
         return $this;
     }
 
