@@ -5,10 +5,14 @@ namespace App\Model;
 class Match {
     /** @var int $id */
     private $id;
-    /** @var array $teams */
-    private $teams;
-    /** @var array $results */
-    private $results;
+    /** @var Team $team1 */
+    private $team1;
+    /** @var Team $team2 */
+    private $team2;
+    /** @var int $result1 */
+    private $result1;
+    /** @var int $result2 */
+    private $result2;
 
     public function getId(): int
     {
@@ -22,26 +26,50 @@ class Match {
         return $this;
     }
 
-    public function getTeams(): array
+    public function getTeam1(): Team
     {
-        return $this->teams;
+        return $this->team1;
     }
 
-    public function setTeams(array $teams): self
+    public function setTeam1(Team $team1): self
     {
-        $this->teams = $teams;
+        $this->team1 = $team1;
 
         return $this;
     }
 
-    public function getResults(): array 
+    public function getTeam2(): Team
     {
-        return $this->results;
+        return $this->team2;
     }
 
-    public function setResults(array $results)
+    public function setTeam2(Team $team2): self
     {
-        $this->results = $results;
+        $this->team2 = $team2;
+
+        return $this;
+    }
+
+    public function getResult1(): int
+    {
+        return $this->result1;
+    }
+
+    public function setResult1(int $result1): self
+    {
+        $this->result1 = $result1;
+
+        return $this;
+    }
+
+    public function getResult2(): int
+    {
+        return $this->result2;
+    }
+
+    public function setResult2(int $result2): self
+    {
+        $this->result2 = $result2;
 
         return $this;
     }
