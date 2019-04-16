@@ -19,10 +19,10 @@ class MatchRepository extends Repository implements IRepository {
     private function convertToModel(array $data) {
         $match = new Match();
         $match->setId((int)$data['match_id'])
-             ->setTeam1($data['team_one'])
-             ->setTeam2($data['team_two'])
-             ->setResult1($data['score_one'])
-             ->setResult2($data['score_two']);
+             ->setTeamOne($data['team_one'])
+             ->setTeamTwo($data['team_two'])
+             ->setResultOne($data['score_one'])
+             ->setResultTwo($data['score_two']);
         return $match;
     }
 
@@ -50,10 +50,10 @@ class MatchRepository extends Repository implements IRepository {
             throw new \Exception('Something went wrong');
         }
         $request = "(team_one, team_two, score_one, score_two) VALUES  ('" . 
-            addslashes($match->getTeam1()) . "','" . 
-            addslashes($match->getTeam2()) . "','" . 
-            addslashes($match->getResult1()) . "','" . 
-            addslashes($match->getResult2()) . "')";
+            addslashes($match->getTeamOne()) . "','" . 
+            addslashes($match->getTeamTwo()) . "','" . 
+            addslashes($match->getResultOne()) . "','" . 
+            addslashes($match->getResultTwo()) . "')";
         return parent::insert($request);
     }
 
@@ -61,10 +61,10 @@ class MatchRepository extends Repository implements IRepository {
         if (!$match instanceof Match) {
             throw new \Exception('Something went wrong');
         }
-        $request = "SET team_one = '" . addslashes($match->getTeam1()) . 
-            "', team_two = '" . addslashes($match->getTeam2()) . 
-            "', score_one = '" . addslashes($match->getResult1()) . 
-            "', score_two = '" . addslashes($match->getResult2()) . 
+        $request = "SET team_one = '" . addslashes($match->getTeamOne()) . 
+            "', team_two = '" . addslashes($match->getTeamTwo()) . 
+            "', score_one = '" . addslashes($match->getResultOne()) . 
+            "', score_two = '" . addslashes($match->getResultTwo()) . 
             "' WHERE id = " . addslashes($match->getId()) . " ";
         parent::update($request);
     }
