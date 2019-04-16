@@ -2,7 +2,7 @@
 
 require_once 'vendor/autoload.php';
 
-require_once 'components/index.php';
+require_once 'components/header.php';
 
 use Symfony\Component\Dotenv\Dotenv;
 
