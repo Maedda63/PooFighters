@@ -21,7 +21,7 @@ class TeamController
 
     public function index()
     {
-        $matches = $this->matchRepository->getResults();
+        $matches = $this->matchRepository->getMatches();
 
         require_once 'src/View/Match/index.php';
     }
@@ -33,7 +33,7 @@ class TeamController
             exit;
         }
         $id = $_GET['match_id'];
-        $match = $this->matchRepository->getResult("WHERE match_id = ${id}");
+        $match = $this->matchRepository->getMatch("WHERE match_id = ${id}");
 
         require_once 'src/View/Match/show.php';
     }
@@ -65,7 +65,7 @@ class TeamController
             } 
         }
 
-        $matches = $matchRepository->getResults();
+        $matches = $this->matchRepository->getMatches();
 
         require_once 'src/View/Match/create.php';
     }
@@ -79,7 +79,7 @@ class TeamController
         $teamRepository = new TeamRepository();
 
         $id = $_GET['match_id'];
-        $match = $this->matchRepository->getResult("WHERE match_id = ${id}");
+        $match = $this->matchRepository->getMatch("WHERE match_id = ${id}");
 
         $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -113,7 +113,7 @@ class TeamController
         }
 
         $id = $_GET['match_id'];
-        $match = $this->matchRepository->getResult("WHERE match_id = ${id}");
+        $match = $this->matchRepository->getMatch("WHERE match_id = ${id}");
         $this->matchRepository->delete($match);
 
         header('Location: /match');
