@@ -18,10 +18,10 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" href=#>Lien 1</a>
-      <a class="nav-item nav-link" href=#>Lien 2</a>
+      <a class="nav-item nav-link" href=#>Équipes</a>
+      <a class="nav-item nav-link" href=#>Joueurs</a>
     </div>
   </div>
 </nav>
-    <div class='container-fluid'>
-        <div class='container'>
+    <div class='container-fluid' style="text-align: center">
+          <h1> Bienvenue au tournoi de Jacky !</h1>
