@@ -1,6 +1,6 @@
 h1 {
     text-align: center;
 }
-.col-3 {
-    border: solid 1px black;
+.inputSize {
+    width: 50px;
 }
