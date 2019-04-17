@@ -6,7 +6,7 @@ require_once './components/header.php';
 
     <div class='container-fluid'>
         <div class='container'>
-            <h1> Editer l'équipe' </h1>
+            <h1> Editer l'équipe </h1>
 
             <form method=post>
             <div class='form-group'>

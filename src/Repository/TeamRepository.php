@@ -60,7 +60,7 @@ class TeamRepository extends Repository implements IRepository {
         if(!$team instanceof Team) {
             throw new \Exception('You can save only teams');
         }
-        $request = "SET name ='" . addslashes($team->getName()) . "' WHERE team_id = " . $team->getId() . " ";
+        $request = "SET team_name ='" . addslashes($team->getName()) . "' WHERE team_id = " . $team->getId() . " ";
         parent::update($request);
     }
 
@@ -69,7 +69,7 @@ class TeamRepository extends Repository implements IRepository {
         if (!$team instanceof Team) {
             throw new \Exception('You can save only teams');
         }
-        $request = "WHERE team_id = " . $category->getId();
+        $request = "WHERE team_id = " . $team->getId();
         parent::delete($request);
     }
 
