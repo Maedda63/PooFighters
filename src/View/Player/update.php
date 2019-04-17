@@ -13,7 +13,7 @@ require_once './components/header.php';
                     <input class='form-control' type="text" name="lastname" value="<?php echo $player->getLastname(); ?>">
                 </div>
                 <div class='form-group'>
-                    <input class='form-control' type="text" name="firstname" value="<?php echo $player->getFirstname(); ?>>
+                    <input class='form-control' type="text" name="firstname" value="<?php echo $player->getFirstname(); ?>">
                 </div>
                 <div class="input-group mb-3">
                     <select class="custom-select">
