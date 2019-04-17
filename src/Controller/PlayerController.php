@@ -36,20 +36,18 @@ class PlayerController {
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             if(isset($_POST['lastname']) && !empty($_POST['lastname']) &&
-            isset($_POST['firstname']) && !empty($_POST['firstname'])
+            isset($_POST['firstname']) && !empty($_POST['firstname']) &&
+            isset($_POST['team']) && !empty($_POST['team'])
             ) {
                 $player = new Player();
-                if (isset($_POST['team']) && !empty($_POST['team'])) {
-                    $team = $teamRepository->getResult('WHERE id =' . $_POST['team']);
-                    $player->setTeam($team);
-                }
+                $team = $teamRepository->getResult('WHERE id =' . $_POST['team']);
                 $player->setLastname($_POST['lastname'])
-                            ->setFirstname($_POST['firstname']);
+                        ->setFirstname($_POST['firstname'])
+                        ->setTeam($team);
                 $this->playerRepository->insert($player);
                 header('Location: /player');
-                exit;
-            } 
-            else {
+                exit; 
+            } else {
                 $errors[] = 'Missing fields';
                 }
         }
