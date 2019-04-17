@@ -27,7 +27,7 @@
     <br>
         <h1> 
           <img src="../public/image/boule1.jpg" style="height: 200px">
-          Bienvenue au tournoi de Jacky !
+          Bienvenue au tournoi de boules de Jacky !
           <img src="../public/image/boule2.jpg" style="height: 200px">
         </h1>
         <br>
