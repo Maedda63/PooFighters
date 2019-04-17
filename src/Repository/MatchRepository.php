@@ -65,7 +65,26 @@ class MatchRepository extends Repository implements IRepository {
             "', team_two = '" . addslashes($match->getTeamTwo()) . 
             "', score_one = '" . addslashes($match->getResultOne()) . 
             "', score_two = '" . addslashes($match->getResultTwo()) . 
-            "' WHERE id = " . addslashes($match->getId()) . " ";
+            "' WHERE match_id = " . addslashes($match->getId()) . " ";
         parent::update($request);
     }
+
+    public function refresh() {
+        parent::delete();
+        parent::connectDB();
+        $db->query('DROP TABLE IF EXISTS match');
+        $db->query('CREATE TABLE IF NOT EXISTS `match`(
+            match_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+            team_one INT,
+            team_two INT,
+            score_one INT,
+            score_two INT,
+            tournament INT,
+            FOREIGN KEY (team_one) REFERENCES team(team_id),
+            FOREIGN KEY (team_two) REFERENCES team(team_id),
+            FOREIGN KEY (tournament) REFERENCES tournament(tournament_id)
+        )');
+        parent::disconnectDB();
+    }
+
 }

@@ -69,6 +69,7 @@ class MatchController
     }
 
     public function createFirstMatches() {
+
         $errors = [];
         $currentMatches = [];
         $teams = $this->teamRepository->getTeams();
@@ -80,8 +81,8 @@ class MatchController
             for ($i=0; $i < 4 ; $i++) { 
                 $match = new Match();
                 $randomKeys = array_rand($teams, 2);
-                $match->setTeamOne($teams[$randomKeys[0]]);
-                $match->setTeamTwo($teams[$randomKeys[1]]);
+                $match->setTeamOne($teams[$randomKeys[0]]->getId());
+                $match->setTeamTwo($teams[$randomKeys[1]]->getId());
                 $teams.splice($randomKeys[1], 1);
                 $teams.splice($randomKeys[0], 1);
                 $this->matchRepository->insert($match);
@@ -142,4 +143,10 @@ class MatchController
         $finals = [$greatFinal, $littleFinal];
         return $finals;
     }
+
+    public function abandonShip() {
+        $this->matchRepository->refresh();
+        header('Location: /match');
+    }
+        
 }
