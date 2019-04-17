@@ -3,7 +3,7 @@
 namespace App\Controller; 
 
 use App\Repository\PlayerRepository;
-use App\Model\Player;
+use App\Model\Player\Player;
 use App\Repository\TeamRepository;
 
 class PlayerController {
@@ -49,7 +49,7 @@ class PlayerController {
                 exit; 
             } else {
                 $errors[] = 'Missing fields';
-                }
+            }
         }
         $teams = $teamRepository->getResults();
 
