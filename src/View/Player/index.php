@@ -4,7 +4,8 @@ require_once './components/header.php';
 
 ?>
 
-<h1>Liste des utilisateurs</h1>
+<h2>Liste des utilisateurs</h2>
+<br>
 <ul>
     <?php
     /** @var \App\Model\Player[] $players */
@@ -12,6 +13,7 @@ require_once './components/header.php';
         <li> <?php echo $player->getFirstName() . ' ' . $player->getLastName(); ?></li>
     <?php endforeach; ?>
 </ul>
-<a href="/player/create">Ajouter</a>
+<br>
+<button class='btn btn-primary'> <a style='text-decoration:none; color:white' href='/player/create'> Ajouter un joueur </a> </button> 
 </body>
 </html>
