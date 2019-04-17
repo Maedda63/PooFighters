@@ -16,7 +16,7 @@ class PlayerController {
     }
 
     public function index() {
-        $players = $this->playerRepository->getResults();
+        $players = $this->playerRepository->getPlayers();
         require_once 'src/View/Player/index.php';
     }
 
@@ -26,7 +26,7 @@ class PlayerController {
             exit;
         }
         $id = $_GET['id'];
-        $player = $this->playerRepository->getResults('WHERE id =' . $id);
+        $player = $this->playerRepository->getPlayers('WHERE id =' . $id);
         require_once 'src/View/Player/show.php';
     }
 
@@ -68,7 +68,7 @@ class PlayerController {
             header('Location: /player');
             exit;
         }
-        $player = $this->playerRepository->getResult('WHERE id=' . $_GET['id']);
+        $player = $this->playerRepository->getPlayer('WHERE id=' . $_GET['id']);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if(isset($_POST['lastname']) && !empty($_POST['lastname']) && 
                 isset($_POST['firstname']) && !empty($_POST['firstname']) &&
