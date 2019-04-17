@@ -9,7 +9,7 @@ require_once './components/header.php';
     <?php
     /** @var \App\Model\Player[] $players */
     foreach ($players as $player) : ?>
-        <li> <?php echo $player->getLastName() . ' ' . $user->getFirstName(); ?></li>
+        <li> <?php echo $player->getFirstName() . ' ' . $player->getLastName(); ?></li>
     <?php endforeach; ?>
 </ul>
 <a href="/player/create">Ajouter</a>
