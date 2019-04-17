@@ -26,9 +26,9 @@
     <div class='container-fluid' style="text-align: center">
     <br>
         <h1> 
-          <img src="https://s3-eu-west-1.amazonaws.com/images.linnlive.com/23982779ac9fbfb3d9848f9e6c4a3338/85bc7676-0870-4387-b751-430770602f1e.jpg" style="height: 200px">
+          <img src="public/image/boule1.jpg" style="height: 200px">
           Bienvenue au tournoi de Jacky !
-          <img src="https://s3-eu-west-1.amazonaws.com/images.linnlive.com/23982779ac9fbfb3d9848f9e6c4a3338/85bc7676-0870-4387-b751-430770602f1e.jpg" style="height: 200px">
+          <img src="public/image/boule2.jpg" style="height: 200px">
         </h1>
         <br>
         <h2>Match en cours</h2>
