@@ -12,10 +12,14 @@ require_once './components/header.php';
             <h2> <?php echo $team->getName(); ?> </h2>
             <button class='btn btn-primary'> <a style='text-decoration:none; color:white' href=<?php echo '/team/update?team_id=' . $team->getId(); ?>> Modifier</a> </button>
             <button class='btn btn-primary'> <a style='text-decoration:none; color:white' href=<?php echo '/team/delete?team_id=' . $team->getId(); ?>> Supprimer</a> </button>
+            <br>
+            <br>
             <?php } ?>
         </div>
         <div class='container pt-5'>
         <button class='btn btn-primary'> <a style='text-decoration:none; color:white' href='/team/create'> Créer une nouvelle équipe </a> </button> 
+        <br>
+        <br>
         </div>
     </div>
 </body>
