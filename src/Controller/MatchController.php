@@ -7,7 +7,7 @@ use App\Model\Match;
 use App\Repository\TeamRepository;
 use App\Repository\MatchRepository;
 
-class TeamController
+class MatchController
 {
     /** @var MatchRepository $matchRepository */
     private $matchRepository;
