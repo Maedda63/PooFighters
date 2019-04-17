@@ -18,7 +18,7 @@ $controllerName = 'App\\Controller\\';
 if( isset($_GET['c']) && !empty($_GET['c']) ) {
     $controllerName .= ucfirst(strtolower($_GET['c'])) . 'Controller';
 } else {
-    $controllerName .= 'IndexController';
+    $controllerName .= 'MatchController';
 }
 
 if( !class_exists($controllerName, true) ) {
