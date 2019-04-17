@@ -8,10 +8,10 @@ require_once './components/header.php';
         <div class="col-6 offset-3">
             <form method="POST">
                 <div class='form-group'>
-                    <input class='form-control' type="text" name="lastname" placeholder="Nom">
+                    <input class='form-control' type="text" name="firstname" placeholder="Prénom">
                 </div>
                 <div class='form-group'>
-                    <input class='form-control' type="text" name="firstname" placeholder="Prénom">
+                    <input class='form-control' type="text" name="lastname" placeholder="Nom">
                 </div>
                 <div class="input-group mb-3">
                     <select name='team' class="custom-select">
