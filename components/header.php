@@ -20,6 +20,7 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link" href="../Team/index">Équipes</a>
       <a class="nav-item nav-link" href="../Player/index">Joueurs</a>
+      <a class="nav-item nav-link" href="../Match/index">Matchs</a>
     </div>
   </div>
 </nav>
