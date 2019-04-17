@@ -13,7 +13,7 @@ require_once './components/header.php';
             <h3>Quarts de finale</h3>
             <br>
             <div class="row">
-                <?php for ($i=1; $i<=4; $i++) { ?>
+                <?php for ($i=0; $i<4; $i++) { ?>
                 <div class="col-3" name="quart-one">
                     <form>
                         <table class="table table-bordered">
