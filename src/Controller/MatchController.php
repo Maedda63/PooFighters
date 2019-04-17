@@ -3,14 +3,17 @@
 namespace App\Controller;
 
 use App\Model\Team;
+use App\Model\Match;
 use App\Repository\TeamRepository;
 use App\Repository\MatchRepository;
 
-class TeamController
+class MatchController
 {
     /** @var MatchRepository $matchRepository */
     private $matchRepository;
+    /** @var array $teams */
     private $teams;
+    /** @var TeamRepository $teamRepository */
     private $teamRepository;
 
     /**
@@ -27,50 +30,6 @@ class TeamController
     {
         $matches = $this->matchRepository->getMatches();
         require_once 'src/View/Match/index.php';
-    }
-
-    public function show()
-    {
-        if (!isset($_GET['match_id']) || empty($_GET['match_id'])) {
-            header('Location: /match');
-            exit;
-        }
-        $id = $_GET['match_id'];
-        $match = $this->matchRepository->getMatch("WHERE match_id = ${id}");
-
-        require_once 'src/View/Match/show.php';
-    }
-
-    public function create()
-    {
-        $teamRepository = new TeamRepository();
-
-        $errors = [];
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['team_one']) && !empty($_POST['team_one']) &&
-                isset($_POST['team_two']) && !empty($_POST['team_two'])) {
-                $teamOneId = $_POST['team_one'];
-                $teamTwoId = $_POST['team_two'];
-                $teamOne = $teamRepository->getTeam("WHERE team_id = ${teamOneId}");
-                $teamTwo = $teamRepository->getTeam("WHERE team_id = ${teamTwoId}");
-                if ($teamOne === null || $teamTwo === null) {
-                    $errors[] = 'Match not found';
-                } else {
-                    $match = new Match();
-                    $match->setTeamOne($_POST['team_one'])
-                        ->setTeamTwo($_POST['team_two']);
-                    $this->matchRepository->insert($match);
-                    header('Location: /match');
-                    exit;
-                }
-            } else {
-                $errors[] = 'Missing fields';
-            } 
-        }
-
-        $matches = $this->matchRepository->getMatches();
-
-        require_once 'src/View/Match/create.php';
     }
 
     public function putResults()
@@ -115,6 +74,8 @@ class TeamController
         $teams = $this->teamRepository->getTeams();
         if (count($teams) !== 8) {
             $errors[] = 'Il doit y avoir 8 équipes pour lancer un tournoi.';
+            header('Location: /match');
+            exit;
         } else {
             for ($i=0; $i < 4 ; $i++) { 
                 $match = new Match();
