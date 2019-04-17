@@ -4,7 +4,7 @@ require_once './components/header.php';
 
 ?>
     
-        <div class=' text-center container-fluid'>
+        <div class='text-center container-fluid'>
             <h2> Liste des équipes </h2>
             <br>
             <div class='container'>
