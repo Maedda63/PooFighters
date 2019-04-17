@@ -143,7 +143,9 @@ class TeamController
             }
         }
         require_once 'src/View/Match/index.php';
-    }   
+    }
+
+    public function zogzog() {}
 
 
 }
