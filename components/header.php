@@ -33,4 +33,3 @@
         </h1>
         <br>
         <div class='container'>
-        <!-- Et là on affichera les match du tournois en cours -->
