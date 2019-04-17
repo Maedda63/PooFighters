@@ -6,9 +6,9 @@
     <title>Tournoi de Jacky</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="public/css/bootstrap.min.css">
-    <script type="text/javacript" src="public/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javacript" src="public/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <script type="text/javacript" src="../public/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javacript" src="../public/js/bootstrap.min.js"></script>
 </head>
 
 <body>

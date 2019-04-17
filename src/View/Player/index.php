@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <title>Page utilisateur</title>
-</head>
-<body>
+<?php
+
+require_once './components/header.php';
+
+?>
 
 <h1>Liste des utilisateurs</h1>
 <ul>
