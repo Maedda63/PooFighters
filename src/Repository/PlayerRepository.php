@@ -62,7 +62,7 @@ class PlayerRepository extends Repository implements IRepository {
         $request = "SET first_name = '" . addslashes($player->getFirstname()) . 
             "', last_name = '" . addslashes($player->getLastname()) . 
             "', team = '" . addslashes($player->getTeam()) . 
-            "' WHERE id = " . addslashes($player->getId()) . " ";
+            "' WHERE player_id = " . addslashes($player->getId()) . " ";
         parent::update($request);
     }
 
@@ -70,7 +70,7 @@ class PlayerRepository extends Repository implements IRepository {
         if (!$player instanceof Player) {
             throw new \Exception('Oops, something went wrong');
         }
-        $request = "WHERE id = " . $player->getId();
+        $request = "WHERE player_id = " . $player->getId();
         parent::delete($request);
     }
     
