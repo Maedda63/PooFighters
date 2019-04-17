@@ -124,7 +124,26 @@ class TeamController
         exit;
     }
 
-
+    public function createFirstMatches() {
+        $errors = [];
+        $currentMatches = [];
+        $teams = $this->teamRepository->getTeams();
+        if (count($teams) !== 8) {
+            $errors[] = 'Il doit y avoir 8 équipes pour lancer un tournoi.';
+        } else {
+            for ($i=0; $i < 4 ; $i++) { 
+                $match = new Match();
+                $randomKeys = array_rand($this->teams, 2);
+                $match->setTeamOne($teams[$randomKeys[0]]);
+                $match->setTeamTwo($teams[$randomKeys[1]]);
+                $teams.splice($randomKeys[0]);
+                $teams.splice($randomKeys[1]);
+                $this->matchRepository->insert($match);
+                $currentMatches[] = $match;
+            }
+        }
+        require_once 'src/View/Match/index.php';
+    }   
 
 
 }
