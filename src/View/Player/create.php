@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <title>Page des joueurs</title>
-    </head>
-    <body>
+<?php
 
+require_once './components/header.php';
+
+?>
     <h1>Ajouter des joueurs</h1>
 
     <?php if(isset($errors) && !emtpy($errors)) : ?>
