@@ -21,7 +21,7 @@ class PlayerController {
     }
 
     public function show() {
-        if(isset($_GET['id']) || empty($_GET['id'])) {
+        if(!isset($_GET['id']) || empty($_GET['id'])) {
             header('Location: /player');
             exit;
         }

@@ -23,7 +23,7 @@
     </div>
   </div>
 </nav>
-    <div class='container-fluid' style="text-align: center">
+    <div class='container-fluid text-center'>
     <br>
         <h1> 
           <img src="../public/image/boule1.jpg" style="height: 200px">
@@ -32,5 +32,5 @@
         </h1>
         <br>
         <h2>Match en cours</h2>
-
+        <div class='container'>
         <!-- Et là on affichera les match du tournois en cours -->
