@@ -4,7 +4,7 @@ require_once './components/header.php';
 
 ?>
 
-            <div class=' text-center container-fluid'>
+            <div class="text-center container-fluid">
                 <h2> Matchs en cours </h2>
 
                 <h3>Quarts de finale</h3>
