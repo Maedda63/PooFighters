@@ -10,6 +10,8 @@ class TeamController
 {
     /** @var MatchRepository $matchRepository */
     private $matchRepository;
+    private $teams;
+    private $teamRepository;
 
     /**
      * MatchController constructor.
@@ -17,6 +19,8 @@ class TeamController
     public function __construct()
     {
         $this->matchRepository = new MatchRepository();
+        $this->teamRepository = new TeamRepository();
+        $this->teams = $this->teamRepository->getTeams();
     }
 
     public function index()
@@ -48,8 +52,8 @@ class TeamController
                 isset($_POST['team_two']) && !empty($_POST['team_two'])) {
                 $teamOneId = $_POST['team_one'];
                 $teamTwoId = $_POST['team_two'];
-                $teamOne = $teamRepository->getResult("WHERE team_id = ${teamOneId}");
-                $teamTwo = $teamRepository->getResult("WHERE team_id = ${teamTwoId}");
+                $teamOne = $teamRepository->getTeam("WHERE team_id = ${teamOneId}");
+                $teamTwo = $teamRepository->getTeam("WHERE team_id = ${teamTwoId}");
                 if ($teamOne === null || $teamTwo === null) {
                     $errors[] = 'Match not found';
                 } else {
@@ -100,7 +104,7 @@ class TeamController
                 $errors[] = 'Missing fields';
             }
         }
-        $teams = $teamRepository->getResults();
+        $teams = $teamRepository->getTeams();
 
         require_once 'src/View/Match/update.php';
     }
@@ -119,4 +123,8 @@ class TeamController
         header('Location: /match');
         exit;
     }
+
+
+
+
 }

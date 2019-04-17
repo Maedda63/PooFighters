@@ -50,7 +50,7 @@ class PlayerController {
                 $errors[] = 'Missing fields';
             }
         }
-        $teams = $teamRepository->getResults();
+        $teams = $teamRepository->getTeams();
 
         require_once 'src/View/Player/create.php';
         return;
@@ -83,7 +83,7 @@ class PlayerController {
                     $errors[] = 'Missing fields';
                 }
             }
-            $teams = $teamRepository->getResults();
+            $teams = $teamRepository->getTeams();
 
             require_once 'src/View/Player/update.php';
             return;
