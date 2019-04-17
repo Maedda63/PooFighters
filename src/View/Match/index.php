@@ -7,8 +7,7 @@ require_once './components/header.php';
         <div class="text-center container-fluid">
             <h2> Matchs en cours </h2>
             <br>
-            <button class="btn btn-warning" onclick="createFirstMatches()">blop</button>
-            <?php echo "blabla"; ?>
+            <button class="btn btn-warning"><a href='/match/createFirstMatches'>Start everything ! </a></button>
             <br>
             <br>
             <h3>Quarts de finale</h3>

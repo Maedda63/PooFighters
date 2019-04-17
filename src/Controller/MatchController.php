@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Model\Team;
 use App\Model\Match;
+use App\Model\Player;
 use App\Repository\TeamRepository;
 use App\Repository\MatchRepository;
+use App\Repository\PlayerRepository;
 
 class MatchController
 {
@@ -15,15 +17,36 @@ class MatchController
     private $teams;
     /** @var TeamRepository $teamRepository */
     private $teamRepository;
-
+    /** @var PlayerRepository $playerRepository */
+    private $playerRepository;
+    
     /**
      * MatchController constructor.
      */
+
+
+
     public function __construct()
     {
         $this->matchRepository = new MatchRepository();
         $this->teamRepository = new TeamRepository();
+        $this->playerRepository = new PlayerRepository();
         $this->teams = $this->teamRepository->getTeams();
+    }
+
+    public function hasEnoughPlayer($team): bool {
+        $id = $team->getId();
+        $count = 0;
+        $players = $this->playerRepository->getPlayers();
+        foreach ($players as $player) {
+            if ($player->getTeam() === $id ) {
+                $count += 1;
+            }
+            if ($count > 1) {
+                return True;
+            } 
+        }
+        return false;
     }
 
     public function index()
@@ -75,22 +98,33 @@ class MatchController
         $teams = $this->teamRepository->getTeams();
         if (count($teams) !== 8) {
             $errors[] = 'Il doit y avoir 8 équipes pour lancer un tournoi.';
-            header('Location: /match');
+            header('Location: /team');
             exit;
         } else {
-            for ($i=0; $i < 4 ; $i++) { 
-                $match = new Match();
-                $randomKeys = array_rand($teams, 2);
-                $match->setTeamOne($teams[$randomKeys[0]]->getId());
-                $match->setTeamTwo($teams[$randomKeys[1]]->getId());
-                //$teams.splice($randomKeys[1], 1);
-                //$teams.splice($randomKeys[0], 1);
-                $this->matchRepository->insert($match);
-                $currentMatches[] = $match;
+            $isCorrect = true;
+            foreach ($teams as $team) {
+                if(!$this->hasEnoughPlayer($team)) {
+                    $isCorrect = false;
+                }
             }
-        }
-        return $currentMatches;
+            if (!$isCorrect) {
+                $errors[] = 'Il doit y avoir au moins 2 joueurs par équipe.';
+                header('Location: /player');
+                exit;
+            } else {
+                for ($i=0; $i < 4 ; $i++) { 
+                    $match = new Match();
+                    $randomKeys = array_rand($teams, 2);
+                    $match->setTeamOne($teams[$randomKeys[0]]->getId());
+                    $match->setTeamTwo($teams[$randomKeys[1]]->getId());
+                    array_splice($teams,$randomKeys[1], 1);
+                    array_splice($teams,$randomKeys[0], 1);
+                    $this->matchRepository->insert($match);
+                    $currentMatches[] = $match;
+                }
+            }
         require_once 'src/View/Match/index.php';
+        }
     }
 
     public function createSemiFinals() {
