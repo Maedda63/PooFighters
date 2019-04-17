@@ -70,10 +70,9 @@ class PlayerController {
                 isset($_POST['firstname']) && !empty($_POST['firstname']) &&
                 isset($_POST['team']) && !empty($_POST['team'])) {
                 
-                $team = $teamRepository->getTeam('WHERE team_id=' . $_POST['team']);
                 $player->setLastname(htmlspecialchars($_POST['lastname']))
                     ->setFirstname(htmlspecialchars($_POST['firstname']))
-                    ->setTeam($team);
+                    ->setTeam($_POST['team']);
 
                 $this->playerRepository->update($player);
 
@@ -93,12 +92,13 @@ class PlayerController {
         if(!isset($_GET['player_id']) || empty($_GET['player_id'])) {
             header('Location: /player');
             return;
+        }
             $id = $_GET['player_id'];
 
             $player = $this->playerRepository->getPlayer("WHERE player_id = ${id}");
             $this->playerRepository->delete($player);
             header('Location: /player');
             exit;
-        }
+        
     }
 }
