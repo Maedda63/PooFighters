@@ -1,3 +1,6 @@
 h1 {
     text-align: center;
 }
+.col-3 {
+    border: solid 1px black;
+}
