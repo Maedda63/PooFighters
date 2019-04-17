@@ -13,6 +13,7 @@ require_once './components/header.php';
             <h3>Quarts de finale</h3>
             <br>
             <div class="row">
+                <?php for ($i=1; $i<=4; $i++) { ?>
                 <div class="col-3" name="quart-one">
                     <form>
                         <table class="table table-bordered">
@@ -24,106 +25,26 @@ require_once './components/header.php';
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td></td>
                                     <td>
-                                        <input class="border-0 inputSize" type="text">
+                                    </td>
+                                    <td>
+                                        <input class="border-0 inputSize" type="text" name='score_one'>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td>
-                                        <input class="border-0 inputSize" type="text" >
+                                        <input class="border-0 inputSize" type="text" name='score_two'>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <button class="btn btn-success" href="/Match/index?match_id=1">Valider les scores</button>
+                        <button class="btn btn-success"> <a href='<?php echo "/Match/index?id=" . $i ?>'>Valider les scores </a> </button>
                     </form>
                     </div>
-                    <div class="col-3" name="quart-two">
-                    <form>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Nom de la team</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <input class="border-0 inputSize" type="text">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <input class="border-0 inputSize" type="text">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button class="btn btn-success">Valider les scores</button>
-                    </form>
-                    </div>
-                    <div class="col-3" name="quart-three">
-                    <form>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Nom de la team</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <input class="border-0 inputSize" type="text">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <input class="border-0 inputSize" type="text">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button class="btn btn-success">Valider les scores</button>
-                    </form>
-                    </div>
-                    <div class="col-3" name="quart-four">
-                    <form>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Nom de la team</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <input class="border-0 inputSize" type="text">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <input class="border-0 inputSize" type="text">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button class="btn btn-success">Valider les scores</button>
-                    </form>
-                </div>
-            </div>
+                    <?php } ?>
             <br>
-
+            </div>
             <h3>Demi-finales</h3>
             <br>
             <div class="row">

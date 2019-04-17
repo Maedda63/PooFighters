@@ -57,13 +57,19 @@ class MatchController
 
     public function putResults()
     {
-        if (!isset($_GET['match_id']) || empty($_GET['match_id'])) {
+        if (!isset($_GET['id']) || empty($_GET['id'])) {
             header('Location: /match');
             exit;
         }
         $teamRepository = new TeamRepository();
 
-        $id = $_GET['match_id'];
+        $id = $_GET['id'];
+        $matches = $this->matchRepository->getMatches();
+        $matchesIds = [];
+        foreach ($matches as $match) {
+            $matchesIds[] = $match->getId();
+        }
+        $id = max($matchesIds) - 3 + $id;
         $match = $this->matchRepository->getMatch("WHERE match_id = ${id}");
 
         $errors = [];
@@ -178,9 +184,5 @@ class MatchController
         return $finals;
     }
 
-    public function abandonShip() {
-        $this->matchRepository->refresh();
-        header('Location: /match');
-    }
-        
+     
 }
