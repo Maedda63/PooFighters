@@ -52,8 +52,8 @@ class MatchRepository extends Repository implements IRepository {
         $request = "(team_one, team_two, score_one, score_two) VALUES  ('" . 
             addslashes($match->getTeamOne()) . "','" .
             addslashes($match->getTeamTwo()) . "','" .
-            addslashes($match->getResultOne()) . "','" .
-            addslashes($match->getResultTwo()) . "')";
+            NULL . "','" .
+            NULL . "')";
         return parent::insert($request);
     }
 
