@@ -62,7 +62,7 @@ class TeamController
                 $errors[] = 'Missing fields';
             }
         }
-        require_once 'src/View/Category/update.php';
+        require_once 'src/View/Team/update.php';
     }
 
     public function delete()
