@@ -72,7 +72,7 @@ class PlayerController {
                 
                 $team = $teamRepository->getResult('WHERE player_id=' . $_POST['team']);
                 $player->setLastname(htmlspecialchars($_POST['lastname']))
-                    ->setFirstname(htemlspecialchars($_POST['firstname']))
+                    ->setFirstname(htmlspecialchars($_POST['firstname']))
                     ->setTeam($team);
 
                 $this->playerRepository->uptdate($player);
