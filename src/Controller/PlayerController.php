@@ -3,7 +3,7 @@
 namespace App\Controller; 
 
 use App\Repository\PlayerRepository;
-use App\Model\Player\Player;
+use App\Model\Player;
 use App\Repository\TeamRepository;
 
 class PlayerController {
@@ -40,10 +40,9 @@ class PlayerController {
             isset($_POST['team']) && !empty($_POST['team'])
             ) {
                 $player = new Player();
-                $team = $teamRepository->getResult('WHERE id =' . $_POST['team']);
                 $player->setLastname($_POST['lastname'])
                         ->setFirstname($_POST['firstname'])
-                        ->setTeam($team);
+                        ->setTeam($_POST['team']);
                 $this->playerRepository->insert($player);
                 header('Location: /player');
                 exit; 

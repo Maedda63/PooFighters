@@ -14,11 +14,11 @@ require_once './components/header.php';
                     <input class='form-control' type="text" name="firstname" placeholder="Prénom">
                 </div>
                 <div class="input-group mb-3">
-                    <select class="custom-select">
+                    <select name='team' class="custom-select">
                         <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option name='team' value="1">One</option>
+                        <option name='team' value="2">Two</option>
+                        <option name='team' value="3">Three</option>
                     </select>
                 </div>
                 <br>
