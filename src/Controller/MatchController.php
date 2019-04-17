@@ -26,7 +26,6 @@ class TeamController
     public function index()
     {
         $matches = $this->matchRepository->getMatches();
-
         require_once 'src/View/Match/index.php';
     }
 
@@ -74,7 +73,7 @@ class TeamController
         require_once 'src/View/Match/create.php';
     }
 
-    public function update()
+    public function putResults()
     {
         if (!isset($_GET['match_id']) || empty($_GET['match_id'])) {
             header('Location: /match');
@@ -93,6 +92,8 @@ class TeamController
                 $scoreTwo = $_POST['score_two'];
                 if($scoreOne === null || $scoreTwo === null) {
                     $errors[] = 'Score not found';
+                } else if($scoreOne === $scoreTwo) {
+                    $errors[] = 'Les scores ne peuvent être égaux';
                 } else {
                     $match->setScoreOne($_POST['score_one'])
                         ->setScoreTwo($_POST['score_two']);
@@ -105,23 +106,7 @@ class TeamController
             }
         }
         $teams = $teamRepository->getTeams();
-
         require_once 'src/View/Match/update.php';
-    }
-
-    public function delete()
-    {
-        if (!isset($_GET['match_id']) || empty($_GET['match_id'])) {
-            header('Location: /match');
-            exit;
-        }
-
-        $id = $_GET['match_id'];
-        $match = $this->matchRepository->getMatch("WHERE match_id = ${id}");
-        $this->matchRepository->delete($match);
-
-        header('Location: /match');
-        exit;
     }
 
     public function createFirstMatches() {
@@ -133,19 +118,67 @@ class TeamController
         } else {
             for ($i=0; $i < 4 ; $i++) { 
                 $match = new Match();
-                $randomKeys = array_rand($this->teams, 2);
+                $randomKeys = array_rand($teams, 2);
                 $match->setTeamOne($teams[$randomKeys[0]]);
                 $match->setTeamTwo($teams[$randomKeys[1]]);
-                $teams.splice($randomKeys[0]);
-                $teams.splice($randomKeys[1]);
+                $teams.splice($randomKeys[1], 1);
+                $teams.splice($randomKeys[0], 1);
                 $this->matchRepository->insert($match);
                 $currentMatches[] = $match;
             }
         }
+        return $currentMatches;
         require_once 'src/View/Match/index.php';
     }
 
-    public function zogzog() {}
+    public function createSemiFinals() {
+        $matches = $this->matchRepository->getMatches();
+        $winningTeams = [];
+        $currentMatches = [];
+        for ($i=0; $i < 4; $i++) { 
+            if ($matches[i]->getScoreOne() > $matches[i]->getScoreTwo()) {
+                $winningTeams[] = $matches[i]->getTeamOne();
+            } else {
+                $winningTeams[] = $matches[i]->getTeamTwo();
+            }
+        }
+        for ($i=0; $i < 2 ; $i++) { 
+            $match = new Match();
+            $randomKeys = array_rand($winningTeams, 2);
+            $match->setTeamOne($winningTeams[$randomKeys[0]]);
+            $match->setTeamTwo($winningTeams[$randomKeys[1]]);
+            $winningTeams.splice($randomKeys[1], 1);
+            $winningTeams.splice($randomKeys[0], 1);
+            $this->matchRepository->insert($match);
+            $currentMatches[] = $match;
+        }
+        return $currentMatches;
+    }
 
-
+    public function createFinals() {
+        $matches = [];
+        $matches[] = $this->matchRepository->getMatch("WHERE match_id = 5");
+        $matches[] = $this->matchRepository->getMatch("WHERE match_id = 6");
+        $winningTeams = [];
+        $loosingTeams = [];
+        for ($i=0; $i < 2; $i++) { 
+            if ($matches[i]->getScoreOne() > $matches[i]->getScoreTwo()) {
+                $winningTeams[] = $matches[i]->getTeamOne();
+                $loosingTeams[] = $matches[i]->getTeamTwo();
+            } else {
+                $winningTeams[] = $matches[i]->getTeamTwo();
+                $loosingTeams[] = $matches[i]->getTeamOne();
+            }
+        }
+        $greatFinal = new Match();
+        $littleFinal = new Match();
+        $greatFinal->setTeamOne($winningTeams[0]);
+        $greatFinal->setTeamTwo($winningTeams[1]);
+        $littleFinal->setTeamOne($loosingTeams[0]);
+        $littleFinal->setTeamTwo($loosingTeams[1]);
+        $this->matchRepository->insert($greatFinal);
+        $this->matchRepository->insert($littleFinal);
+        $finals = [$greatFinal, $littleFinal];
+        return $finals;
+    }
 }
