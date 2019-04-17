@@ -73,7 +73,7 @@ class TeamController
         }
         $id = $_GET['team_id'];
 
-        $team = $this->teamRepository->getResult("WHERE team_id = ${id}");
+        $team = $this->teamRepository->getTeam("WHERE team_id = ${id}");
         $this->teamRepository->delete($team);
         header('Location: /team');
         exit;

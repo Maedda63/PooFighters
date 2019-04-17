@@ -58,7 +58,7 @@ class TeamRepository extends Repository implements IRepository {
     public function update($team)
     {
         if(!$team instanceof Team) {
-            throw new \Exception('You can save only teams');
+            throw new \Exception('You can update only teams');
         }
         $request = "SET team_name ='" . addslashes($team->getName()) . "' WHERE team_id = " . $team->getId() . " ";
         parent::update($request);
@@ -67,7 +67,7 @@ class TeamRepository extends Repository implements IRepository {
     public function delete($team)
     {
         if (!$team instanceof Team) {
-            throw new \Exception('You can save only teams');
+            throw new \Exception('You can delete only teams');
         }
         $request = "WHERE team_id = " . $team->getId();
         parent::delete($request);
