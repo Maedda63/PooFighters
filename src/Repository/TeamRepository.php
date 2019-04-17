@@ -16,7 +16,7 @@ class TeamRepository extends Repository implements IRepository {
         parent::__construct(TeamRepository::$table);
     }
 
-    public function getResult(string $request =''): ?Team
+    public function getTeam(string $request =''): ?Team
     {
         $team = null;
         $result = parent::getResult($request);
@@ -29,7 +29,7 @@ class TeamRepository extends Repository implements IRepository {
         return $team;
     }
 
-    public function getResults(string $request = ''): array
+    public function getTeams(string $request = ''): array
     {
         $teams = [];
         $results = parent::getResults($request);

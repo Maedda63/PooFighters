@@ -17,7 +17,7 @@ class TeamController
 
     public function index()
     {
-        $teams = $this->teamRepository->getResults();
+        $teams = $this->teamRepository->getTeams();
 
         require_once 'src/View/Team/index.php';
     }
@@ -48,7 +48,7 @@ class TeamController
         }
 
         $id = $_GET['team_id'];
-        $team = $this->teamRepository->getResult("WHERE team_id = ${id}");
+        $team = $this->teamRepository->getTeam("WHERE team_id = ${id}");
 
         $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
