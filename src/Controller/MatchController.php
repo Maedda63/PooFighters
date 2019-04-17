@@ -65,7 +65,7 @@ class MatchController
             }
         }
         $teams = $teamRepository->getTeams();
-        require_once 'src/View/Match/update.php';
+        require_once 'src/View/Match/index.php';
     }
 
     public function createFirstMatches() {
