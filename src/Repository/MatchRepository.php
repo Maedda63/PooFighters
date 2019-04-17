@@ -50,9 +50,9 @@ class MatchRepository extends Repository implements IRepository {
             throw new \Exception('Something went wrong');
         }
         $request = "(team_one, team_two, score_one, score_two) VALUES  ('" . 
-            addslashes($match->getTeamOne()) . "','" . 
-            addslashes($match->getTeamTwo()) . "','" . 
-            addslashes($match->getResultOne()) . "','" . 
+            addslashes($match->getTeamOne()) . "','" .
+            addslashes($match->getTeamTwo()) . "','" .
+            addslashes($match->getResultOne()) . "','" .
             addslashes($match->getResultTwo()) . "')";
         return parent::insert($request);
     }

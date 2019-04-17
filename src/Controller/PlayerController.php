@@ -3,7 +3,7 @@
 namespace App\Controller; 
 
 use App\Repository\PlayerRepository;
-use App\Model\Player\Player;
+use App\Model\Player;
 use App\Repository\TeamRepository;
 
 class PlayerController {
@@ -35,24 +35,23 @@ class PlayerController {
         $teamRepository = new TeamRepository();
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if(isset($_POST['player']) && !empty($_POST['player']) &&
-            isset($_POST['team']) && !empty($_POST['team'])
+            if(isset($_POST['lastname']) && !empty($_POST['lastname']) &&
+            isset($_POST['firstname']) && !empty($_POST['firstname'])
             ) {
                 $player = new Player();
-                $team = $teamRepository->getResult('WHERE id =' . $_POST['team']);
-                if($team == NULL) {
-                    $errors[] = 'Team not found';
-                } else {
-                    $player->setLastname($_POST['lastname'])
-                            ->setFirstname($_POST['firstname'])
-                            ->setTeam($team);
-                    $this->playerRepository->insert($player);
-                    header('Location: /player');
-                    exit;
+                if (isset($_POST['team']) && !empty($_POST['team'])) {
+                    $team = $teamRepository->getResult('WHERE id =' . $_POST['team']);
+                    $player->setTeam($team);
                 }
-            } else {
+                $player->setLastname($_POST['lastname'])
+                            ->setFirstname($_POST['firstname']);
+                $this->playerRepository->insert($player);
+                header('Location: /player');
+                exit;
+            } 
+            else {
                 $errors[] = 'Missing fields';
-            }
+                }
         }
         $teams = $teamRepository->getResults();
 

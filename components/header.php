@@ -31,6 +31,5 @@
           <img src="../public/image/boule2.jpg" style="height: 200px">
         </h1>
         <br>
-        <h2>Match en cours</h2>
         <div class='container'>
         <!-- Et là on affichera les match du tournois en cours -->
