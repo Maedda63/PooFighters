@@ -83,8 +83,8 @@ class MatchController
                 $randomKeys = array_rand($teams, 2);
                 $match->setTeamOne($teams[$randomKeys[0]]->getId());
                 $match->setTeamTwo($teams[$randomKeys[1]]->getId());
-                $teams.splice($randomKeys[1], 1);
-                $teams.splice($randomKeys[0], 1);
+                //$teams.splice($randomKeys[1], 1);
+                //$teams.splice($randomKeys[0], 1);
                 $this->matchRepository->insert($match);
                 $currentMatches[] = $match;
             }
