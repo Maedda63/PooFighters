@@ -58,6 +58,7 @@ class MatchController
         require_once 'src/View/Match/index.php';
     }
 
+
     //Function to generate results for a given match
     public function putResults($match)
     {   
@@ -158,44 +159,41 @@ class MatchController
         return $finals;
     }
 
-    //function to get the right ID in the DATA Base
-    public function getCurrentMatchId($id) {
-        $teamRepository = new TeamRepository();
-        $matches = $this->matchRepository->getMatches();
-        $matchesIds = [];
-        foreach ($matches as $match) {
-            $matchesIds[] = $match->getId();
+        //function to get the right ID in the DATA Base
+        public function getCurrentMatchId($id) {
+            $teamRepository = new TeamRepository();
+            $matches = $this->matchRepository->getMatches();
+            $matchesIds = [];
+            foreach ($matches as $match) {
+                $matchesIds[] = $match->getId();
+            }
+            $id = max($matchesIds) - 4 + $id;
+            return($id);
         }
-        $id = max($matchesIds) - 4 + $id;
-        return($id);
-    }
-
-    //function that simulates the tournament
-    public function doEverything() {
-        $currentMatches = $this->createFirstMatches();
-        foreach ($currentMatches as $currentMatch) {
-            $this->putResults($currentMatch);
-        }
-        $currentSemiMatches = $this->createSemiFinals($currentMatches);
-        foreach ($currentSemiMatches as $currentMatch) {
-            $this->putResults($currentMatch);
-        }
-        $finals = $this->createFinals($currentSemiMatches);
-        foreach ($finals as $final) {
-            $this->putResults($final);
-        }
-        if ($finals[0]->getResultOne() < $finals[0]->getResultTwo()) {
-            $winner = $this->teamRepository->getTeam('WHERE team_id =' . 
-            $this->matchRepository->getMatch('WHERE match_id =' . 
-            $finals[0]->getId())->getTeamTwo())->getName();
-        } else {
-            $winner = $this->teamRepository->getTeam('WHERE team_id =' . 
-            $this->matchRepository->getMatch('WHERE match_id =' . 
-            $finals[0]->getId())->getTeamOne())->getName();
-        }
-        require_once 'src/View/Match/show.php';
-    }
-
     
-     
+        //function that simulates the tournament
+        public function doEverything() {
+            $currentMatches = $this->createFirstMatches();
+            foreach ($currentMatches as $currentMatch) {
+                $this->putResults($currentMatch);
+            }
+            $currentSemiMatches = $this->createSemiFinals($currentMatches);
+            foreach ($currentSemiMatches as $currentMatch) {
+                $this->putResults($currentMatch);
+            }
+            $finals = $this->createFinals($currentSemiMatches);
+            foreach ($finals as $final) {
+                $this->putResults($final);
+            }
+            if ($finals[0]->getResultOne() < $finals[0]->getResultTwo()) {
+                $winner = $this->teamRepository->getTeam('WHERE team_id =' . 
+                $this->matchRepository->getMatch('WHERE match_id =' . 
+                $finals[0]->getId())->getTeamTwo())->getName();
+            } else {
+                $winner = $this->teamRepository->getTeam('WHERE team_id =' . 
+                $this->matchRepository->getMatch('WHERE match_id =' . 
+                $finals[0]->getId())->getTeamOne())->getName();
+            }
+            require_once 'src/View/Match/show.php';
+        }  
 }
