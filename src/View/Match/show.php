@@ -7,7 +7,7 @@ require_once './components/header.php';
         <div class="text-center container-fluid">
             <h2> Matchs en cours </h2>
             <br>
-            <button class="btn btn-warning"><a href='/match/doEverything'>Start everything ! </a></button>
+            <button class="btn btn-primary"><a href='/match/doEverything'>Générer le tournoi</a></button>
             <br>
             
                 <?php if ($this->errors) {
