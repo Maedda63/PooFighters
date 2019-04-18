@@ -58,8 +58,8 @@ require_once './components/header.php';
                     </table>
                 </div>
                 <?php } ?>
-            <br>
             </div>
+            <br>
             <h3>Demi-finales</h3>
             <br> 
             <div class="row">
@@ -102,6 +102,7 @@ require_once './components/header.php';
             </div>
             <br>
             <h3>Troisième place</h3>
+            <br>
             <div class="col-6 offset-3" name="thirdPlace">
                 <table class="table table-bordered">
                     <thead>
@@ -138,8 +139,15 @@ require_once './components/header.php';
             </div>
             <br>
             <h3>Finale</h3>
+            <br>
             <div class="col-6 offset-3" name="final">
                 <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nom de la team</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr>
                             <td>
@@ -171,7 +179,7 @@ require_once './components/header.php';
             <img src="../public/image/coupe.png" style="height: 200px">
             <br>
             <br>
-            <h2>L'équipe gagnante de ce tournoi est <?php echo ' ' . $winner . ' ' ?>    !</h2>
+            <h2>L'équipe gagnante de ce tournoi est <b> <?php echo ' ' . $winner . ' ' ?> </b>  !</h2>
             <br>
         </div>
             <?php } ?>

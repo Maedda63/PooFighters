@@ -136,6 +136,7 @@ class MatchController
     public function createFinals($currentSemiMatches) {
         $winningTeams = [];
         $loosingTeams = [];
+        //Check who wins last round
         for ($i=0; $i < 2; $i++) { 
             if ($currentSemiMatches[$i]->getResultOne() > $currentSemiMatches[$i]->getResultTwo()) {
                 $winningTeams[] = $currentSemiMatches[$i]->getTeamOne();
@@ -145,12 +146,14 @@ class MatchController
                 $loosingTeams[] = $currentSemiMatches[$i]->getTeamOne();
             }
         }
+        //set the finals matches
         $greatFinal = new Match();
         $littleFinal = new Match();
         $greatFinal->setTeamOne($winningTeams[0]);
         $greatFinal->setTeamTwo($winningTeams[1]);
         $littleFinal->setTeamOne($loosingTeams[0]);
         $littleFinal->setTeamTwo($loosingTeams[1]);
+        //insert into DB
         $this->matchRepository->insert($greatFinal);
         $this->matchRepository->insert($littleFinal);
         $greatFinal = $this->matchRepository->getMatch("WHERE match_id =" . $this->getCurrentMatchId(3));
@@ -173,18 +176,25 @@ class MatchController
     
         //function that simulates the tournament
         public function doEverything() {
+            //create first matches
             $currentMatches = $this->createFirstMatches();
+            //put first matches results
             foreach ($currentMatches as $currentMatch) {
                 $this->putResults($currentMatch);
             }
+            //generate semi finals
             $currentSemiMatches = $this->createSemiFinals($currentMatches);
+            //put semi finals results
             foreach ($currentSemiMatches as $currentMatch) {
                 $this->putResults($currentMatch);
             }
+            //generate finals
             $finals = $this->createFinals($currentSemiMatches);
+            //put finals results
             foreach ($finals as $final) {
                 $this->putResults($final);
             }
+            //get the winner 
             if ($finals[0]->getResultOne() < $finals[0]->getResultTwo()) {
                 $winner = $this->teamRepository->getTeam('WHERE team_id =' . 
                 $this->matchRepository->getMatch('WHERE match_id =' . 
