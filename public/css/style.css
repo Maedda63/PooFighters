@@ -21,3 +21,23 @@ nav
 {
     background-image: linear-gradient(white, #eed9c8);
 }
+h1 {
+    font-style: italic;
+    font-size: 3rem;
+}
+h2 {
+    text-decoration: black underline;
+    font-size: 2.5rem;
+}
+h3 {
+    font-size: 2rem;
+    font-style: oblique;
+    text-decoration: underline;
+}
+p {
+    font-size: 1.5rem;
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
