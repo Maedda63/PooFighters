@@ -55,134 +55,141 @@ class MatchController
         require_once 'src/View/Match/index.php';
     }
 
-    public function putResults()
-    {
-        if (!isset($_GET['id']) || empty($_GET['id'])) {
-            header('Location: /match');
-            exit;
+        //Function to generate results for a given match
+        public function putResults($match)
+        {   
+            $scoreOne = rand(0,13);
+            do {
+            $scoreTwo = rand(0,13);
+            } while ($scoreOne == $scoreTwo);
+            $match->setResultOne($scoreOne)
+            ->setResultTwo($scoreTwo);
+            $this->matchRepository->update($match);
         }
-        $teamRepository = new TeamRepository();
-
-        $id = $_GET['id'];
-        $matches = $this->matchRepository->getMatches();
-        $matchesIds = [];
-        foreach ($matches as $match) {
-            $matchesIds[] = $match->getId();
-        }
-        $id = max($matchesIds) - 3 + $id;
-        $match = $this->matchRepository->getMatch("WHERE match_id = ${id}");
-
-        $errors = [];
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['score_one']) && !empty($_POST['score_one']) && 
-                isset($_POST['score_two']) && !empty($_POST['score_two'])) {
-                $scoreOne = $_POST['score_one'];
-                $scoreTwo = $_POST['score_two'];
-                if($scoreOne === null || $scoreTwo === null) {
-                    $errors[] = 'Score not found';
-                } else if($scoreOne === $scoreTwo) {
-                    $errors[] = 'Les scores ne peuvent être égaux';
-                } else {
-                    $match->setScoreOne($_POST['score_one'])
-                        ->setScoreTwo($_POST['score_two']);
-                    $this->matchRepository->update($match);
-                    header('Location: /match');
-                    exit;
-                }
-            } else {
-                $errors[] = 'Missing fields';
-            }
-        }
-        $teams = $teamRepository->getTeams();
-        require_once 'src/View/Match/index.php';
-    }
-
-    public function createFirstMatches() {
-
-        $errors = [];
-        $currentMatches = [];
-        $teams = $this->teamRepository->getTeams();
-        if (count($teams) !== 8) {
-            $errors[] = 'Il doit y avoir 8 équipes pour lancer un tournoi.';
-            header('Location: /team');
-            exit;
-        } else {
-            $isCorrect = true;
-            foreach ($teams as $team) {
-                if(!$this->hasEnoughPlayer($team)) {
-                    $isCorrect = false;
-                }
-            }
-            if (!$isCorrect) {
-                $errors[] = 'Il doit y avoir au moins 2 joueurs par équipe.';
-                header('Location: /player');
+    
+        //function to generate and save the finals quarters
+        public function createFirstMatches() {
+            $teamRepository = new TeamRepository();
+            $currentMatches = [];
+            $teams = $this->teamRepository->getTeams();
+            if (count($teams) !== 8) {
+                $this->errors[] = 'Il doit y avoir 8 équipes pour lancer un tournoi.';
+                require_once 'src/View/Match/show.php';
                 exit;
             } else {
-                for ($i=0; $i < 4 ; $i++) { 
-                    $match = new Match();
-                    $randomKeys = array_rand($teams, 2);
-                    $match->setTeamOne($teams[$randomKeys[0]]->getId());
-                    $match->setTeamTwo($teams[$randomKeys[1]]->getId());
-                    array_splice($teams,$randomKeys[1], 1);
-                    array_splice($teams,$randomKeys[0], 1);
-                    $this->matchRepository->insert($match);
-                    $currentMatches[] = $match;
+                $isCorrect = true;
+                foreach ($teams as $team) {
+                    if(!$this->hasEnoughPlayer($team)) {
+                        $isCorrect = false;
+                    }
+                }
+                if (!$isCorrect) {
+                    $this->errors[] = 'Il doit y avoir au moins 2 joueurs par équipe.';
+                    require_once 'src/View/Match/show.php';
+                    exit;
+                } else {
+                    for ($i=0; $i < 4 ; $i++) { 
+                        $match = new Match();
+                        $randomKeys = array_rand($teams, 2);
+                        $match->setTeamOne($teams[$randomKeys[0]]->getId());
+                        $match->setTeamTwo($teams[$randomKeys[1]]->getId());
+                        array_splice($teams,$randomKeys[1], 1);
+                        array_splice($teams,$randomKeys[0], 1);
+                        $this->matchRepository->insert($match);
+                        $currentMatches[] = $this->matchRepository->getMatch("WHERE match_id =" . $this->getCurrentMatchId(4));
+                    }
+                }
+                return $currentMatches;
+            }
+        }
+    
+        //function to generate the semi Finals given the quarter matches
+        public function createSemiFinals($currentMatches) {
+            $winningTeams = [];
+            $currentSemiMatches = [];
+            for ($i=0; $i < 4; $i++) { 
+                if ($currentMatches[$i]->getResultOne() > $currentMatches[$i]->getResultTwo()) {
+                    $winningTeams[] = $currentMatches[$i]->getTeamOne();
+                } else {
+                    $winningTeams[] = $currentMatches[$i]->getTeamTwo();
                 }
             }
-        require_once 'src/View/Match/index.php';
-        }
-    }
-
-    public function createSemiFinals() {
-        $matches = $this->matchRepository->getMatches();
-        $winningTeams = [];
-        $currentMatches = [];
-        for ($i=0; $i < 4; $i++) { 
-            if ($matches[i]->getScoreOne() > $matches[i]->getScoreTwo()) {
-                $winningTeams[] = $matches[i]->getTeamOne();
-            } else {
-                $winningTeams[] = $matches[i]->getTeamTwo();
+            for ($i=0; $i < 2 ; $i++) { 
+                $match = new Match();
+                $randomKeys = array_rand($winningTeams, 2);
+                $match->setTeamOne($winningTeams[$randomKeys[0]]);
+                $match->setTeamTwo($winningTeams[$randomKeys[1]]);
+                array_splice($winningTeams,$randomKeys[1], 1);
+                array_splice($winningTeams,$randomKeys[0], 1);
+                $this->matchRepository->insert($match);
+                $match = $this->matchRepository->getMatch("WHERE match_id =" . $this->getCurrentMatchId(4));
+                $currentSemiMatches[] = $match;
             }
+            return $currentSemiMatches;    
         }
-        for ($i=0; $i < 2 ; $i++) { 
-            $match = new Match();
-            $randomKeys = array_rand($winningTeams, 2);
-            $match->setTeamOne($winningTeams[$randomKeys[0]]);
-            $match->setTeamTwo($winningTeams[$randomKeys[1]]);
-            $winningTeams.splice($randomKeys[1], 1);
-            $winningTeams.splice($randomKeys[0], 1);
-            $this->matchRepository->insert($match);
-            $currentMatches[] = $match;
-        }
-        return $currentMatches;
-    }
-
-    public function createFinals() {
-        $matches = [];
-        $matches[] = $this->matchRepository->getMatch("WHERE match_id = 5");
-        $matches[] = $this->matchRepository->getMatch("WHERE match_id = 6");
-        $winningTeams = [];
-        $loosingTeams = [];
-        for ($i=0; $i < 2; $i++) { 
-            if ($matches[i]->getScoreOne() > $matches[i]->getScoreTwo()) {
-                $winningTeams[] = $matches[i]->getTeamOne();
-                $loosingTeams[] = $matches[i]->getTeamTwo();
-            } else {
-                $winningTeams[] = $matches[i]->getTeamTwo();
-                $loosingTeams[] = $matches[i]->getTeamOne();
+    
+        //function to generate the finals given the semi-finals
+        public function createFinals($currentSemiMatches) {
+            $winningTeams = [];
+            $loosingTeams = [];
+            for ($i=0; $i < 2; $i++) { 
+                if ($currentSemiMatches[$i]->getResultOne() > $currentSemiMatches[$i]->getResultTwo()) {
+                    $winningTeams[] = $currentSemiMatches[$i]->getTeamOne();
+                    $loosingTeams[] = $currentSemiMatches[$i]->getTeamTwo();
+                } else {
+                    $winningTeams[] = $currentSemiMatches[$i]->getTeamTwo();
+                    $loosingTeams[] = $currentSemiMatches[$i]->getTeamOne();
+                }
             }
+            $greatFinal = new Match();
+            $littleFinal = new Match();
+            $greatFinal->setTeamOne($winningTeams[0]);
+            $greatFinal->setTeamTwo($winningTeams[1]);
+            $littleFinal->setTeamOne($loosingTeams[0]);
+            $littleFinal->setTeamTwo($loosingTeams[1]);
+            $this->matchRepository->insert($greatFinal);
+            $this->matchRepository->insert($littleFinal);
+            $greatFinal = $this->matchRepository->getMatch("WHERE match_id =" . $this->getCurrentMatchId(3));
+            $littleFinal = $this->matchRepository->getMatch("WHERE match_id =" . $this->getCurrentMatchId(4));
+            $finals = [$greatFinal, $littleFinal];
+            return $finals;
         }
-        $greatFinal = new Match();
-        $littleFinal = new Match();
-        $greatFinal->setTeamOne($winningTeams[0]);
-        $greatFinal->setTeamTwo($winningTeams[1]);
-        $littleFinal->setTeamOne($loosingTeams[0]);
-        $littleFinal->setTeamTwo($loosingTeams[1]);
-        $this->matchRepository->insert($greatFinal);
-        $this->matchRepository->insert($littleFinal);
-        $finals = [$greatFinal, $littleFinal];
-        return $finals;
-    }
-
-     
+    
+        //function to get the right ID in the DATA Base
+        public function getCurrentMatchId($id) {
+            $teamRepository = new TeamRepository();
+            $matches = $this->matchRepository->getMatches();
+            $matchesIds = [];
+            foreach ($matches as $match) {
+                $matchesIds[] = $match->getId();
+            }
+            $id = max($matchesIds) - 4 + $id;
+            return($id);
+        }
+    
+        //function that simulates the tournament
+        public function doEverything() {
+            $currentMatches = $this->createFirstMatches();
+            foreach ($currentMatches as $currentMatch) {
+                $this->putResults($currentMatch);
+            }
+            $currentSemiMatches = $this->createSemiFinals($currentMatches);
+            foreach ($currentSemiMatches as $currentMatch) {
+                $this->putResults($currentMatch);
+            }
+            $finals = $this->createFinals($currentSemiMatches);
+            foreach ($finals as $final) {
+                $this->putResults($final);
+            }
+            if ($finals[0]->getResultOne() < $finals[0]->getResultTwo()) {
+                $winner = $this->teamRepository->getTeam('WHERE team_id =' . 
+                $this->matchRepository->getMatch('WHERE match_id =' . 
+                $finals[0]->getId())->getTeamTwo())->getName();
+            } else {
+                $winner = $this->teamRepository->getTeam('WHERE team_id =' . 
+                $this->matchRepository->getMatch('WHERE match_id =' . 
+                $finals[0]->getId())->getTeamOne())->getName();
+            }
+            require_once 'src/View/Match/show.php';
+        }  
 }
