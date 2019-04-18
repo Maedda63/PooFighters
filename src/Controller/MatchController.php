@@ -76,6 +76,7 @@ class MatchController
         $teamRepository = new TeamRepository();
         $currentMatches = [];
         $teams = $this->teamRepository->getTeams();
+        //check the errors
         if (count($teams) !== 8) {
             $this->errors[] = 'Il doit y avoir 8 équipes pour lancer un tournoi.';
             require_once 'src/View/Match/show.php';
@@ -92,6 +93,7 @@ class MatchController
                 require_once 'src/View/Match/show.php';
                 exit;
             } else {
+                //generate the matches
                 for ($i=0; $i < 4 ; $i++) { 
                     $match = new Match();
                     $randomKeys = array_rand($teams, 2);
