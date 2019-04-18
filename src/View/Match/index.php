@@ -41,8 +41,8 @@ require_once './components/header.php';
                         </table>
                         <button class="btn btn-success"> <a href='<?php echo "/Match/index?id=" . $i ?>'>Valider les scores </a> </button>
                     </form>
-                    </div>
-                    <?php } ?>
+                </div>
+                <?php } ?>
             <br>
             </div>
             <h3>Demi-finales</h3>
