@@ -4,8 +4,7 @@ h1 {
 .inputSize {
     width: 50px;
 }
-
-button > a {
+button > a:hover, button > a {
     text-decoration: none;
     color: white;
 }
