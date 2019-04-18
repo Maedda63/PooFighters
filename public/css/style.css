@@ -4,3 +4,8 @@ h1 {
 .inputSize {
     width: 50px;
 }
+
+button > a {
+    text-decoration: none;
+    color: white;
+}
