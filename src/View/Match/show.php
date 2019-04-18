@@ -58,8 +58,8 @@ require_once './components/header.php';
                     </table>
                 </div>
                 <?php } ?>
-            <br>
             </div>
+            <br>
             <h3>Demi-finales</h3>
             <br> 
             <div class="row">
@@ -102,6 +102,7 @@ require_once './components/header.php';
             </div>
             <br>
             <h3>Troisième place</h3>
+            <br>
             <div class="col-6 offset-3" name="thirdPlace">
                 <table class="table table-bordered">
                     <thead>
@@ -138,6 +139,7 @@ require_once './components/header.php';
             </div>
             <br>
             <h3>Finale</h3>
+            <br>
             <div class="col-6 offset-3" name="final">
                 <table class="table table-bordered">
                     <thead>

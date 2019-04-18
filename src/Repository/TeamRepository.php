@@ -16,6 +16,9 @@ class TeamRepository extends Repository implements IRepository {
         parent::__construct(TeamRepository::$table);
     }
 
+    /**
+     * function to get ONE Team in the database
+     */
     public function getTeam(string $request =''): ?Team
     {
         $team = null;
@@ -29,6 +32,9 @@ class TeamRepository extends Repository implements IRepository {
         return $team;
     }
 
+    /**
+     * function to get ALL Teams in the database
+     */
     public function getTeams(string $request = ''): array
     {
         $teams = [];
@@ -46,6 +52,9 @@ class TeamRepository extends Repository implements IRepository {
         return $teams;
     }
 
+    /**
+     * function to insert values for 'team_name' in the 'team' table
+     */
     public function insert($team)
     {
         if (!$team instanceof Team) {
@@ -55,6 +64,9 @@ class TeamRepository extends Repository implements IRepository {
         return parent::insert($request);
     }
 
+    /** 
+     * function to modify the values in the 'team' table
+     */
     public function update($team)
     {
         if(!$team instanceof Team) {
@@ -64,6 +76,9 @@ class TeamRepository extends Repository implements IRepository {
         parent::update($request);
     }
 
+    /**
+     *  function to delete a team from the team table
+     */
     public function delete($team)
     {
         if (!$team instanceof Team) {

@@ -20,6 +20,7 @@ class TeamController
         $this->playerRepository = new PlayerRepository();
     }
 
+    // function to show all teams when the page is up
     public function index()
     {
         $teams = $this->teamRepository->getTeams();
@@ -27,6 +28,7 @@ class TeamController
         require_once 'src/View/Team/index.php';
     }
 
+    // function to create a team
     public function create()
     {
         $errors = [];
@@ -45,6 +47,7 @@ class TeamController
         require_once 'src/View/Team/create.php';
     }
 
+    // function to modify the team content (here the team name)
     public function update()
     {
         if (!isset($_GET['team_id']) || empty($_GET['team_id'])) {
@@ -70,6 +73,7 @@ class TeamController
         require_once 'src/View/Team/update.php';
     }
 
+    // function to delete a team from the database
     public function delete()
     {
         if (!isset($_GET['team_id']) || empty($_GET['team_id'])) {
@@ -84,6 +88,7 @@ class TeamController
         exit;
     }
 
+    // function to show players from the team (target by the team_id from the player object)
     public function getMembers($team) {
         $players = $this->playerRepository->getPlayers();
         $members = [];
