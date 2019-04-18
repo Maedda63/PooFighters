@@ -11,3 +11,13 @@ button > a:hover, button > a {
 body {
     background-image: url('https://i.skyrock.net/5986/64805986/pics/3012857709_1_3_rurX6awB.jpg');
 }
+.table thead th {
+    border-color: darkred;
+}
+.table tbody td {
+    border-color: red;
+}
+nav
+{
+    background-image: linear-gradient(white, #eed9c8);
+}

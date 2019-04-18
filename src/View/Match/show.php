@@ -169,6 +169,8 @@ require_once './components/header.php';
             <br>
             <br>
             <img src="../public/image/coupe.png" style="height: 200px">
+            <br>
+            <br>
             <h2>L'équipe gagnante de ce tournoi est <?php echo ' ' . $winner . ' ' ?>    !</h2>
             <br>
         </div>
