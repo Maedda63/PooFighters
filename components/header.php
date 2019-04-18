@@ -13,24 +13,24 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="../Team/index">Équipes</a>
-      <a class="nav-item nav-link" href="../Player/index">Joueurs</a>
-      <a class="nav-item nav-link" href="../Match/index">Matchs</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="../Team/index">Équipes</a>
+        <a class="nav-item nav-link" href="../Player/index">Joueurs</a>
+        <a class="nav-item nav-link" href="../Match/index">Matchs</a>
+      </div>
     </div>
-  </div>
-</nav>
-    <div class='container-fluid text-center'>
-    <br>
-        <h1> 
-          <img src="../public/image/boule1.jpg" style="height: 200px">
-          Bienvenue au tournoi de boules de Jacky !
-          <img src="../public/image/boule2.jpg" style="height: 200px">
-        </h1>
-        <br>
-        <div class='container'>
+  </nav>
+      <div class='container-fluid text-center'>
+      <br>
+          <h1> 
+            <img src="../public/image/boule1.png" style="height: 200px">
+            Bienvenue au tournoi de boules de Jacky !
+            <img src="../public/image/boule2.png" style="height: 200px">
+          </h1>
+          <br>
+          <div class='container'>
