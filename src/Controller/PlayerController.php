@@ -20,7 +20,8 @@ class PlayerController {
         require_once 'src/View/Player/index.php';
     }
 
-    public function show() {
+    // Show the player with his ID
+    public function show() { 
         if(!isset($_GET['player_id']) || empty($_GET['player_id'])) {
             header('Location: /player');
             exit;
@@ -30,6 +31,7 @@ class PlayerController {
         require_once 'src/View/Player/show.php';
     }
 
+    // Create player 
     public function create() {
         $errors = [];
         $teamRepository = new TeamRepository();
@@ -56,6 +58,7 @@ class PlayerController {
         return;
     }
 
+    // Update players already created
     public function update() {
         $errors = [];
         $teamRepository = new TeamRepository();
@@ -88,6 +91,7 @@ class PlayerController {
             return;
     }
 
+    // Delete players already created
     public function delete() {
         if(!isset($_GET['player_id']) || empty($_GET['player_id'])) {
             header('Location: /player');
@@ -99,6 +103,5 @@ class PlayerController {
             $this->playerRepository->delete($player);
             header('Location: /player');
             exit;
-        
     }
 }
