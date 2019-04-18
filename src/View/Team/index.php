@@ -10,9 +10,6 @@ require_once './components/header.php';
             <div class='container'>
                 <?php foreach ($teams as $team) { ?>
                 <h3> <?php echo $team->getName(); ?> </h3>
-                <?php foreach ($this->getMembers($team) as $member) { ?>
-                    <p> <?php echo $member->getFirstName() . ' ' . $member->getLastName(); ?> </p>
-                <?php } ?>
                 <button class='btn btn-success'> <a style='text-decoration:none; color:white' href=<?php echo '/team/update?team_id=' . $team->getId(); ?>> Modifier</a> </button>
                 <button class='btn btn-danger'> <a style='text-decoration:none; color:white' href=<?php echo '/team/delete?team_id=' . $team->getId(); ?>> Supprimer</a> </button>
                 <br>

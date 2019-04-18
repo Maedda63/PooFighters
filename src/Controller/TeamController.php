@@ -3,21 +3,16 @@
 namespace App\Controller;
 
 use App\Model\Team;
-use App\Model\Player;
 use App\Repository\TeamRepository;
-use App\Repository\PlayerRepository;
 
 class TeamController
 {
     /** @var TeamRepository $teamRepository */
     private $teamRepository;
-    /** @var PlayerRepository $playerRepository */
-    private $playerRepository;
 
     public function __construct()
     {
         $this->teamRepository = new TeamRepository();
-        $this->playerRepository = new PlayerRepository();
     }
 
     public function index()
@@ -82,17 +77,5 @@ class TeamController
         $this->teamRepository->delete($team);
         header('Location: /team');
         exit;
-    }
-
-    public function getMembers($team) {
-        $players = $this->playerRepository->getPlayers();
-        $members = [];
-        $id = $team->getId();
-        foreach ($players as $player) {
-            if ($player->getTeam() === $id) {
-                $members[] = $player;
-            }
-        }
-        return $members;
     }
 }
