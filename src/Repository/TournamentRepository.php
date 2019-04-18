@@ -16,6 +16,7 @@ class TournamentRepository extends Repository implements IRepository {
         parent::__construct(TournamentRepository::$table);
     }
 
+    //convert the data into an object
     private function convertToModel(array $data) {
         $tournament = new Tournament();
         $tournament->setId((int)$data['tournament_id'])

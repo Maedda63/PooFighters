@@ -16,6 +16,7 @@ class MatchRepository extends Repository implements IRepository {
         parent::__construct(MatchRepository::$table);
     }
 
+    //convert the data into an object
     private function convertToModel(array $data) {
         $match = new Match();
         $match->setId((int)$data['match_id'])

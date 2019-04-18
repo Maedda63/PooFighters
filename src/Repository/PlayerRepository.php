@@ -15,7 +15,7 @@ class PlayerRepository extends Repository implements IRepository {
     {
         parent::__construct(PlayerRepository::$table);
     }
-
+    //convert the data into an object
     private function convertToModel(array $data) {
         $player = new Player();
         $player->setId((int)$data['player_id'])
