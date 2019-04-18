@@ -41,3 +41,6 @@ ul {
     margin: 0;
     padding: 0;
 }
+.winner {
+    text-decoration: none;
+}
