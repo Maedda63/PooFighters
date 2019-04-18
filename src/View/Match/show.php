@@ -140,6 +140,12 @@ require_once './components/header.php';
             <h3>Finale</h3>
             <div class="col-6 offset-3" name="final">
                 <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nom de la team</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr>
                             <td>
